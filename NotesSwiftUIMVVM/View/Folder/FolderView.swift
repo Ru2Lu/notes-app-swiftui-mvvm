@@ -47,7 +47,7 @@ struct FolderView: View {
                 .fontWeight(.bold)
                 .foregroundColor(.black)) {
             if folderViewModel.folders.count > 0 {
-                FolderCell(name: "全てのiPhone")
+                FolderCell(name: "すべてのiPhone")
             }
             FolderCell(name: "メモ")
             ForEach(folderViewModel.folders) { folder in

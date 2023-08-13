@@ -58,7 +58,7 @@ struct AddNewFolder: View {
     }
     
     private var saveButton: some View {
-        Button("保存", action: saveFolder)
+        Button("完了", action: saveFolder)
     }
     
     private func saveFolder() {

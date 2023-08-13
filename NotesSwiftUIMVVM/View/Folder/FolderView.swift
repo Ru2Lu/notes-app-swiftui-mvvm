@@ -10,7 +10,10 @@ import SwiftUI
 struct FolderView: View {
     @ObservedObject var folderViewModel: FolderViewModel
     @State var searchString = ""
-    @State var isShowPopover = false
+    @State var isShowAddFolderSheet = false
+    @State var isShowEditFolderPopover = false
+    @State var folderNameToUpdate = ""
+    @State var selectedFolder: Folder?
     
     var body: some View {
         ZStack {
@@ -28,8 +31,11 @@ struct FolderView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isShowPopover) {
-                AddNewFolder(with: folderViewModel)
+            .sheet(isPresented: $isShowAddFolderSheet) {
+                AddNewFolder(with: folderViewModel)}
+        
+            if isShowEditFolderPopover {
+                EditFolder(with: folderViewModel, selectedFolder: selectedFolder!, isShow: $isShowEditFolderPopover)
             }
         }
     }
@@ -46,8 +52,22 @@ struct FolderView: View {
             FolderCell(name: "メモ")
             ForEach(folderViewModel.folders) { folder in
                 FolderCell(name: folder.name)
+                    .contextMenu {
+                        Button(action: {
+                            selectedFolder = folder
+                            isShowEditFolderPopover = true
+                        }) {
+                            Text("名称変更")
+                            Image(systemName: "pencil")
+                        }
+                        Button(role: .destructive, action: {
+                            folderViewModel.deleteFolder(folder)
+                        }) {
+                            Text("削除")
+                            Image(systemName: "trash")
+                        }
+                    }
             }
-            .onDelete(perform: folderViewModel.deleteFolder)
         }
         .textCase(nil)
     }
@@ -55,7 +75,7 @@ struct FolderView: View {
     private var addFolderButton: some View {
         Image(systemName: "folder.badge.plus")
             .onTapGesture {
-                isShowPopover.toggle()
+                isShowAddFolderSheet.toggle()
             }
     }
     

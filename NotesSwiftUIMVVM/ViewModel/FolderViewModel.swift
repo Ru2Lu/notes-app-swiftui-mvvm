@@ -23,8 +23,16 @@ class FolderViewModel: ObservableObject {
         folders.append(newFolder)
     }
     
-    func deleteFolder(at offsets: IndexSet) {
-        folders.remove(atOffsets: offsets)
+    func updateFolder(_ folder: Folder, newName: String) {
+        if let index = folders.firstIndex(where: { $0.id == folder.id }) {
+            folders[index].name = newName
+        }
+    }
+    
+    func deleteFolder(_ folder: Folder) {
+        if let index = folders.firstIndex(where: { $0.id == folder.id }) {
+            folders.remove(at: index)
+        }
     }
 }
 

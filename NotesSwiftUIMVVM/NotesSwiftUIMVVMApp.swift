@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct NotesSwiftUIMVVMApp: App {
+    @StateObject private var folderViewModel = FolderViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            FolderView(folderViewModel: folderViewModel)
         }
     }
 }

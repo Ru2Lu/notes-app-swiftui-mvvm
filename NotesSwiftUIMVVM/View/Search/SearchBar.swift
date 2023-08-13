@@ -23,5 +23,6 @@ struct SearchBar_Previews: PreviewProvider {
     static var previews: some View {
         @State var searchString = ""
         SearchBar(text: $searchString)
+            .environment(\.locale, Locale(identifier: "ja_JP"))
     }
 }

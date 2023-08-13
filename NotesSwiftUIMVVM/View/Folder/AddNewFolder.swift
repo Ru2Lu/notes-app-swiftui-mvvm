@@ -82,6 +82,7 @@ struct AddNewFolder: View {
 struct AddNewFolder_Previews: PreviewProvider {
     static var previews: some View {
         let folderViewModel = FolderViewModel()
-        return AddNewFolder(with: folderViewModel)
+        return AddNewFolder(with: folderViewModel)            .environment(\.locale, Locale(identifier: "ja_JP"))
+
     }
 }

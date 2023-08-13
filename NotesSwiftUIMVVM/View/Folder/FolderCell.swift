@@ -21,5 +21,6 @@ struct FolderCell: View {
 struct FolderCell_Previews: PreviewProvider {
     static var previews: some View {
         FolderCell(name: "テスト1")
+            .environment(\.locale, Locale(identifier: "ja_JP"))
     }
 }

@@ -87,6 +87,6 @@ struct FolderView: View {
 struct FolderView_Previews: PreviewProvider {
     static var previews: some View {
         let folderViewModel = FolderViewModel()
-        return FolderView(folderViewModel: folderViewModel)
+        return FolderView(folderViewModel: folderViewModel).environment(\.locale, Locale(identifier: "ja_JP"))
     }
 }

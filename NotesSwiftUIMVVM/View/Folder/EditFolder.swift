@@ -102,6 +102,7 @@ struct EditFolder_Previews: PreviewProvider {
     static var previews: some View {
         let folderViewModel = FolderViewModel()
         @State var folder = Folder(name: "テストフォルダ1")
-        EditFolder(with: folderViewModel, selectedFolder: folder, isShow: .constant(true))
+        EditFolder(with: folderViewModel, selectedFolder: folder, isShow: .constant(true))            .environment(\.locale, Locale(identifier: "ja_JP"))
+
     }
 }

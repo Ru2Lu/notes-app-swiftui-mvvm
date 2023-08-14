@@ -13,6 +13,7 @@ struct FolderCell: View {
     var body: some View {
         HStack {
             Image(systemName: "folder")
+                .foregroundColor(Color.accentColor)
             Text(name)
         }
     }

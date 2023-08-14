@@ -74,6 +74,7 @@ struct FolderView: View {
     
     private var addFolderButton: some View {
         Image(systemName: "folder.badge.plus")
+            .foregroundColor(Color.accentColor)
             .onTapGesture {
                 isShowAddFolderSheet.toggle()
             }
@@ -81,6 +82,7 @@ struct FolderView: View {
     
     private var addNoteButton: some View {
         Image(systemName: "square.and.pencil")
+            .foregroundColor(Color.accentColor)
     }
 }
 

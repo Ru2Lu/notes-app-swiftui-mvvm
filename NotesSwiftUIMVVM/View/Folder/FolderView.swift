@@ -49,24 +49,27 @@ struct FolderView: View {
             if folderViewModel.folders.count > 0 {
                 FolderCell(name: "すべてのiPhone")
             }
-            FolderCell(name: "メモ")
             ForEach(folderViewModel.folders) { folder in
-                FolderCell(name: folder.name)
-                    .contextMenu {
-                        Button(action: {
-                            selectedFolder = folder
-                            isShowEditFolderPopover = true
-                        }) {
-                            Text("名称変更")
-                            Image(systemName: "pencil")
+                if !folder.isEditable {
+                    FolderCell(name: folder.name)
+                } else {
+                    FolderCell(name: folder.name)
+                        .contextMenu {
+                            Button(action: {
+                                selectedFolder = folder
+                                isShowEditFolderPopover = true
+                            }) {
+                                Text("名称変更")
+                                Image(systemName: "pencil")
+                            }
+                            Button(role: .destructive, action: {
+                                folderViewModel.deleteFolder(folder)
+                            }) {
+                                Text("削除")
+                                Image(systemName: "trash")
+                            }
                         }
-                        Button(role: .destructive, action: {
-                            folderViewModel.deleteFolder(folder)
-                        }) {
-                            Text("削除")
-                            Image(systemName: "trash")
-                        }
-                    }
+                }
             }
         }
         .textCase(nil)
@@ -81,14 +84,19 @@ struct FolderView: View {
     }
     
     private var addNoteButton: some View {
-        Image(systemName: "square.and.pencil")
-            .foregroundColor(Color.accentColor)
+        NavigationLink {
+            AddNoteView(folderViewModel: folderViewModel)
+        } label: {
+            Label("", systemImage: "square.and.pencil")
+                .foregroundColor(Color.accentColor)
+        }
     }
 }
 
 struct FolderView_Previews: PreviewProvider {
     static var previews: some View {
         let folderViewModel = FolderViewModel()
-        return FolderView(folderViewModel: folderViewModel).environment(\.locale, Locale(identifier: "ja_JP"))
+        return FolderView(folderViewModel: folderViewModel)
+            .environment(\.locale, Locale(identifier: "ja_JP"))
     }
 }

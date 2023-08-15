@@ -9,6 +9,7 @@ import SwiftUI
 
 class FolderViewModel: ObservableObject {
     @Published var folders: [Folder] = []
+    var noteViewModel = NoteViewModel()
     
     init() {
         loadFolders()
@@ -34,9 +35,20 @@ class FolderViewModel: ObservableObject {
             folders.remove(at: index)
         }
     }
+    
+    func selecteFolder(_ folder: Folder) {
+        noteViewModel.notes = folder.notes
+    }
 }
 
 var testFolders = [
+    Folder(name: "メモ", isEditable: false, notes: testNotes),
     Folder(name: "テストフォルダ1"),
     Folder(name: "テストフォルダ2")
+]
+
+var testNotes = [
+    Note(title: "タイトル1", content: "コンテント1"),
+    Note(title: "タイトル2", content: "コンテント2"),
+    Note(title: "タイトル3", content: "コンテント3")
 ]

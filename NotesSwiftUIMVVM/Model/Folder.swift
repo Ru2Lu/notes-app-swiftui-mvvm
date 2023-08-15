@@ -10,4 +10,6 @@ import SwiftUI
 struct Folder: Identifiable {
     var id = UUID()
     var name: String
+    var isEditable: Bool = true
+    var notes: [Note] = []
 }

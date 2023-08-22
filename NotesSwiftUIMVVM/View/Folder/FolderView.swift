@@ -47,13 +47,13 @@ struct FolderView: View {
                 .fontWeight(.bold)
                 .foregroundColor(.black)) {
             if folderViewModel.folders.count > 0 {
-                FolderCell(name: "すべてのiPhone")
+                FolderCell(folderViewModel: folderViewModel, selectedFolder: nil)
             }
             ForEach(folderViewModel.folders) { folder in
                 if !folder.isEditable {
-                    FolderCell(name: folder.name)
+                    FolderCell(folderViewModel: folderViewModel, selectedFolder: folder)
                 } else {
-                    FolderCell(name: folder.name)
+                    FolderCell(folderViewModel: folderViewModel, selectedFolder: folder)
                         .contextMenu {
                             Button(action: {
                                 selectedFolder = folder

@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct FolderCell: View {
-    var name: String
+    @ObservedObject var folderViewModel: FolderViewModel
+    var selectedFolder: Folder?
     
     var body: some View {
         NavigationLink {
-            Text("NoteListView")
+            NoteListView(folderViewModel: folderViewModel, selectedFolder: selectedFolder)
         } label: {
             HStack {
                 Image(systemName: "folder")
                     .foregroundColor(Color.accentColor)
-                Text(name)
+                Text(selectedFolder?.name ?? "すべてのiPhone")
             }
         }
     }
@@ -25,7 +26,9 @@ struct FolderCell: View {
 
 struct FolderCell_Previews: PreviewProvider {
     static var previews: some View {
-        FolderCell(name: "テスト1")
+        let folderViewModel = FolderViewModel()
+        let folder = Folder(name: "テストメモ1", isEditable: true, notes: testNotes)
+        FolderCell(folderViewModel: folderViewModel, selectedFolder: folder)
             .environment(\.locale, Locale(identifier: "ja_JP"))
     }
 }

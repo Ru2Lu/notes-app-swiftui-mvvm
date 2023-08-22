@@ -16,7 +16,7 @@ struct AddNoteView: View {
     init(folderViewModel: FolderViewModel) {
         self.folderViewModel = folderViewModel
         if let uneditableFolder = folderViewModel.folders.first(where: { $0.isEditable == false }) {
-            folderViewModel.selecteFolder(uneditableFolder)
+            folderViewModel.selectFolder(uneditableFolder)
         }
     }
     

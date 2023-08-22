@@ -36,8 +36,16 @@ class FolderViewModel: ObservableObject {
         }
     }
     
-    func selecteFolder(_ folder: Folder) {
-        noteViewModel.notes = folder.notes
+    func selectFolder(_ folder: Folder?) {
+        if folder == nil {
+            var allNotes: [Note] = []
+            for folder in testFolders {
+                allNotes += folder.notes
+            }
+            noteViewModel.notes = allNotes
+        } else {
+            noteViewModel.notes = folder!.notes
+        }
     }
 }
 

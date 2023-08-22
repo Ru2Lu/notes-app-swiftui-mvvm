@@ -11,10 +11,14 @@ struct FolderCell: View {
     var name: String
     
     var body: some View {
-        HStack {
-            Image(systemName: "folder")
-                .foregroundColor(Color.accentColor)
-            Text(name)
+        NavigationLink {
+            Text("NoteListView")
+        } label: {
+            HStack {
+                Image(systemName: "folder")
+                    .foregroundColor(Color.accentColor)
+                Text(name)
+            }
         }
     }
 }
